@@ -57,3 +57,8 @@ for:
       secure: Rrk1zp93EpCyxec/GXKnRnJjX7vU+ClNZEBnxbM+1j6l+C56qSV7B/fUrVsJuZYV
     on: 
       branch: master
+  test_script:
+    - nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
+    - OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -c debug System.IO.Abstractions.TestingHelpers.Tests" -filter:"+[System.IO.Abstractions]* -[System.IO.Abstractions.TestingHelpers.Tests]*" -output:"coverage.xml" -oldstyle
+    - pip install codecov
+    - codecov -f "coverage.xml"

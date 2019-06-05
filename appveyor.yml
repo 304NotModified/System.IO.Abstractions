@@ -59,6 +59,6 @@ for:
       branch: master
   test_script:
     - nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
-    - OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -c debug System.IO.Abstractions.TestingHelpers.Tests" -filter:"+[System.IO.Abstractions]* -[System.IO.Abstractions.TestingHelpers.Tests]*" -output:"coverage.xml" -oldstyle
+    - OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -f netcoreapp2.0 -c debug System.IO.Abstractions.TestingHelpers.Tests" -filter:"+[System.IO.Abstractions]* +[System.IO.Abstractions.TestingHelpers]* -[System.IO.Abstractions.TestingHelpers.Tests]*" -output:"coverage.xml" -oldstyle
     - pip install codecov
     - codecov -f "coverage.xml"

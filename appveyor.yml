@@ -34,6 +34,13 @@ before_package:
 # This step replaces the inheritdoc tags in the xml documentation with documentation from mscorlib.xml
 - ps: '& $env:TEMP_DIR\InheritDoc.$env:INHERITDOC_VERSION\tools\InheritDoc.exe -b $env:APPVEYOR_BUILD_FOLDER -g "c:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.X\mscorlib.xml" -o'
 
+
+test_script:
+- nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
+- OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -f netcoreapp2.0 -c debug System.IO.Abstractions.TestingHelpers.Tests" -filter:"+[System.IO.Abstractions]* +[System.IO.Abstractions.TestingHelpers]* -[System.IO.Abstractions.TestingHelpers.Tests]*" -output:"coverage.xml" -oldstyle
+- pip install codecov
+- codecov -f "coverage.xml"
+
 # Perform deployments only for Windows job
 for:
 -
@@ -58,8 +65,3 @@ for:
     on: 
       branch: master
 
-test_script:
-  - nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
-  - OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -f netcoreapp2.0 -c debug System.IO.Abstractions.TestingHelpers.Tests" -filter:"+[System.IO.Abstractions]* +[System.IO.Abstractions.TestingHelpers]* -[System.IO.Abstractions.TestingHelpers.Tests]*" -output:"coverage.xml" -oldstyle
-  - pip install codecov
-  - codecov -f "coverage.xml"

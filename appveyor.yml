@@ -38,11 +38,12 @@ before_package:
 
 
 test_script:
-- nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
-- OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -f netcoreapp2.0 -c debug System.IO.Abstractions.TestingHelpers.Tests"  -nodefaultfilters  -filter:" -[System.A*]* -[System.B*]* -[System.C*]* -[System.D*]* -[System.E*]* -[System.F*]* -[System.G*]* -[System.H*]* -[System.J *]* -[System.K*]* -[System.L*]* -[System.M*]* -[System.N*]* -[System.O*]* -[System.P*]* -[System.Q*]* -[System.R*]* -[System.S*]* -[System.T*]* -[System.U*]* -[System.V*]* -[System.W*]* -[System.X*]* -[System.Y*]* -[System.Z*]* -[System.IO.B*]* -[System.IO.C*]* -[System.IO.D*]* -[System.IO.E*]* -[System.IO.F*]* -[System.IO.G*]* -[System.IO.H*]* -[System.IO.I*]* -[System.IO.J*]* -[System.IO.K*]* -[System.IO.L*]* -[System.IO.M*]* -[System.IO.N*]* -[System.IO.O*]* -[System.IO.P*]* -[System.IO.Q*]* -[System.IO.R*]* -[System.IO.S*]* -[System.IO.T*]* -[System.IO.U*]* -[System.IO.V*]* -[System.IO.W*]* -[System.IO.X*]* -[System.IO.Y*]* -[System.IO.Z*]* -[dotnet]* -[*Dotnet*]* -[Microsoft*]* -[NuGet*]* -[System]* -[System.IO]* +[System.IO.Abstractions]* +[System.IO.Abstractions.TestingHelpers]* -[System.IO.Abstractions.TestingHelpers.Tests]* -[mscorlib*]* -[Microsoft.VisualBasic]*" -output:"coverage1.xml" -oldstyle -hideskipped:all
-- echo "open cover done"
-- pip install codecov
-- codecov -f "coverage.xml"
+- ps: dotnet --version  
+- ps: nuget.exe install OpenCover -ExcludeVersion -DependencyVersion Ignore
+- ps: OpenCover\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test -f netcoreapp2.0 -c debug System.IO.Abstractions.TestingHelpers.Tests"  -nodefaultfilters  -filter:" -[System.A*]* -[System.B*]* -[System.C*]* -[System.D*]* -[System.E*]* -[System.F*]* -[System.G*]* -[System.H*]* -[System.J *]* -[System.K*]* -[System.L*]* -[System.M*]* -[System.N*]* -[System.O*]* -[System.P*]* -[System.Q*]* -[System.R*]* -[System.S*]* -[System.T*]* -[System.U*]* -[System.V*]* -[System.W*]* -[System.X*]* -[System.Y*]* -[System.Z*]* -[System.IO.B*]* -[System.IO.C*]* -[System.IO.D*]* -[System.IO.E*]* -[System.IO.F*]* -[System.IO.G*]* -[System.IO.H*]* -[System.IO.I*]* -[System.IO.J*]* -[System.IO.K*]* -[System.IO.L*]* -[System.IO.M*]* -[System.IO.N*]* -[System.IO.O*]* -[System.IO.P*]* -[System.IO.Q*]* -[System.IO.R*]* -[System.IO.S*]* -[System.IO.T*]* -[System.IO.U*]* -[System.IO.V*]* -[System.IO.W*]* -[System.IO.X*]* -[System.IO.Y*]* -[System.IO.Z*]* -[dotnet]* -[*Dotnet*]* -[Microsoft*]* -[NuGet*]* -[System]* -[System.IO]* +[System.IO.Abstractions]* +[System.IO.Abstractions.TestingHelpers]* -[System.IO.Abstractions.TestingHelpers.Tests]* -[mscorlib*]* -[Microsoft.VisualBasic]*" -output:"coverage1.xml" -oldstyle -hideskipped:all
+- ps: echo "open cover done"
+- ps: pip install codecov
+- ps: codecov -f "coverage.xml"
 
 # Perform deployments only for Windows job
 for:

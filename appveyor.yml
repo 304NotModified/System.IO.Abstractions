@@ -29,6 +29,8 @@ before_build:
  
 build:
   publish_nuget: true
+  parallel: true 
+  verbosity: minimal
 
 before_package:
 # This step replaces the inheritdoc tags in the xml documentation with documentation from mscorlib.xml
